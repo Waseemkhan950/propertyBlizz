@@ -3,17 +3,20 @@
 import { toast } from "react-toastify";
 import { addProperty } from "../actions/propertyActions";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 const AddPropertyForm = () => {
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		setLoading(true);
 		const formData = new FormData(e.currentTarget);
 		const response = await addProperty(formData);
 		console.log(response);
 		if (response.success === true)
 			router.push(`/properties/${response.propertyId}`);
 		toast.success("Property Added Successfully.");
+		setLoading(false);
 		// e.currentTarget.reset();
 	};
 
@@ -403,9 +406,12 @@ const AddPropertyForm = () => {
 
 			<div>
 				<button
-					className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-					type="submit">
-					Add Property
+					className={`bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline ${
+						loading ? "opacity-50 cursor-not-allowed" : ""
+					}`}
+					type="submit"
+					disabled={loading}>
+					{loading ? "Adding Property..." : "Add Property"}
 				</button>
 			</div>
 		</form>

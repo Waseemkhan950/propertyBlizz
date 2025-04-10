@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-// const MONGODB_URI =
-// 	process.env.MONGODB_URI || "mongodb://localhost:27017/propertyblizz";
-
 let connected = false;
 const connectDB = async () => {
 	try {
@@ -10,8 +7,6 @@ const connectDB = async () => {
 			console.log("MongoDB is already connected");
 			return;
 		}
-
-		mongoose.set("strictQuery", true);
 		const conn = await mongoose.connect(process.env.MONGODB_URI_REMOTE, {
 			maxPoolSize: 10,
 			serverSelectionTimeoutMS: 30000, // Increased from 15000 to 30000

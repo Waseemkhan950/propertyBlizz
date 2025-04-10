@@ -3,7 +3,10 @@
 import { toast } from "react-toastify";
 import { editProperty } from "../actions/propertyActions";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 function PropertyEditForm({ property }) {
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 	const {
 		name,
@@ -20,12 +23,13 @@ function PropertyEditForm({ property }) {
 	} = property;
 	async function handleSubmit(e) {
 		e.preventDefault();
+		setLoading(true);
 
 		const formData = new FormData(e.currentTarget);
 		const response = await editProperty(property._id, formData);
-		console.log(response.success);
 		if (response.success) toast.success("Property Updated Successfully.");
 		router.push(`/properties/${response.propertyId}`);
+		setLoading(false);
 		// e.currentTarget.reset();
 	}
 	return (
@@ -448,9 +452,14 @@ function PropertyEditForm({ property }) {
 
 			<div>
 				<button
-					className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
-					type="submit">
-					Update Property
+					className={`bg-blue-500 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline ${
+						loading
+							? "opacity-50 cursor-not-allowed 25000"
+							: "hover:bg-blue-600"
+					}`}
+					type="submit"
+					disabled={loading}>
+					{loading ? "Updating..." : "Update Property"}
 				</button>
 			</div>
 		</form>

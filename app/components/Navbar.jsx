@@ -249,9 +249,9 @@ const Navbar = () => {
 												Your Profile
 											</Link>
 											<Link
-												href="/properties/savedProperties"
+												href="/properties/saved"
 												className={`block px-4 py-2 text-sm text-gray-700 ${
-													pathName === "/properties/savedProperties" &&
+													pathName === "/properties/saved" &&
 													"bg-black text-white"
 												}`}
 												role="menuitem"

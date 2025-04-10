@@ -1,15 +1,29 @@
+import BookmarkButton from "@/app/components/BookmarkButton";
+import PropertyContactForm from "@/app/components/propertyContactForm";
 import PropertyDetails from "@/app/components/PropertyDetails";
 import PropertyHeaderImage from "@/app/components/PropertyImage";
-import PropertyImages from "@/app/components/propertyImages";
+import PropertyImages from "@/app/components/PropertyImages";
+import ShareButton from "@/app/components/ShareButton";
 import connectDB from "@/config/config";
 import Property from "@/models/Property";
+import User from "@/models/User";
+import { getSessionUser } from "@/utils/getSessionUser";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
-
 const PropertyPage = async ({ params }) => {
 	await connectDB();
-	const propertyId = await params.id;
-	const property = await Property.findById(propertyId).lean();
+	const sessionUser = await getSessionUser();
+	const { userId, user: userData } = sessionUser;
+	const property = await Property.findById({ _id: await params.id }).lean();
+	const serlizedProperty = JSON.parse(JSON.stringify(property));
+	let user;
+	let isBookmarked = false;
+
+	if (userId) {
+		user = await User.findOne({ _id: userId });
+		isBookmarked = user.bookmarks.includes(property._id);
+	}
+
 	return (
 		<>
 			<PropertyHeaderImage image={property.images[0]} />
@@ -28,6 +42,19 @@ const PropertyPage = async ({ params }) => {
 					<div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
 						{/* Property Info */}
 						<PropertyDetails property={property} />
+						{userId ? (
+							<aside className="space-y-4">
+								<BookmarkButton
+									property={serlizedProperty}
+									isBookmarked={isBookmarked}
+								/>
+								<ShareButton property={serlizedProperty} />
+								<PropertyContactForm
+									property={serlizedProperty}
+									user={userData}
+								/>
+							</aside>
+						) : null}
 					</div>
 				</div>
 			</section>
