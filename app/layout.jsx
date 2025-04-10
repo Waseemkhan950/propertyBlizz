@@ -1,4 +1,9 @@
 import "./assets/styles/globals.css";
+import AuthProvider from "./components/AuthProvider";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const metadata = {
 	title: "Property Blizz",
 	keywords: "Real estate, Property management, Property listing",
@@ -8,7 +13,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<body cz-shortcut-listen="true" className="min-h-screen flex flex-col">
+				<AuthProvider>
+					<Navbar />
+					<main className="flex-grow">{children}</main>
+					<ToastContainer />
+					<Footer />
+				</AuthProvider>
+			</body>
 		</html>
 	);
 }
