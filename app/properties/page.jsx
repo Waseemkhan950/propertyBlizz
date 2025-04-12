@@ -5,6 +5,7 @@ import PropertySearchForm from "../components/PropertySearchForm";
 import Pagination from "../components/Pagination";
 async function Properties({ searchParams: { page = 1, pageSize = 9 } }) {
 	await connectDB();
+
 	// pagination logic
 	const skip = (page - 1) * pageSize;
 	const total = await Property.countDocuments({});

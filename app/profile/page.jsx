@@ -5,7 +5,8 @@ import defaultProfile from "../assets/images/profile.png";
 import { getSessionUser } from "@/utils/getSessionUser";
 import Image from "next/image";
 import UserProperties from "../components/UserProperties";
-const ProfilePage = async () => {
+export const dynamic = "force-dynamic";
+async function ProfilePage() {
 	await connectDB();
 	const sessionUser = await getSessionUser();
 	if (!sessionUser || !sessionUser.userId) {
@@ -18,7 +19,6 @@ const ProfilePage = async () => {
 	// Get properties and serialize them to plain JSON
 	const userProperties = await Property.find({ owner: id }).lean();
 	const serializedProperties = JSON.parse(JSON.stringify(userProperties));
-
 	return (
 		<section className="bg-gradient-to-b from-blue-50 to-white min-h-screen">
 			<div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -88,6 +88,6 @@ const ProfilePage = async () => {
 			</div>
 		</section>
 	);
-};
+}
 
 export default ProfilePage;

@@ -4,6 +4,7 @@ import { getSessionUser } from "@/utils/getSessionUser";
 import MessageCard from "../components/MessageCard";
 import { Suspense } from "react";
 import Spinner from "../components/Spinner";
+export const dynamic = "force-dynamic";
 
 async function MessagesPage() {
 	await connectDB();
@@ -39,9 +40,7 @@ async function MessagesPage() {
 						<p>You have no messages</p>
 					) : (
 						sortedMessages.map((message, index) => (
-							<Suspense fallback={<Spinner />}>
-								<MessageCard key={index} message={message} />
-							</Suspense>
+							<MessageCard key={index} message={message} />
 						))
 					)}
 				</div>

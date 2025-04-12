@@ -1,6 +1,7 @@
 import SavedProperties from "@/app/components/SavedProperties";
 import User from "@/models/User";
 import { getSessionUser } from "@/utils/getSessionUser";
+export const dynamic = "force-dynamic";
 
 async function BookMarkedProperties() {
 	const sessionUser = await getSessionUser();

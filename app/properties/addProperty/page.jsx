@@ -1,5 +1,5 @@
 import AddPropertyForm from "@/app/components/AddPropertyForm";
-
+export const dynamic = "force-dynamic";
 function AddProperty() {
 	return (
 		<section className="bg-blue-50">
