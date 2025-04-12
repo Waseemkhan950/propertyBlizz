@@ -4,6 +4,32 @@ import { toast } from "react-toastify";
 import { editProperty } from "../actions/propertyActions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import {
+	FaUserCircle,
+	FaEnvelope,
+	FaPhone,
+	FaBed,
+	FaBath,
+	FaRulerCombined,
+	FaMapMarkerAlt,
+	FaDollarSign,
+	FaWifi,
+	FaUtensils,
+	FaWasher,
+	FaCar,
+	FaSwimmingPool,
+	FaHotTub,
+	FaShieldAlt,
+	FaWheelchair,
+	FaElevator,
+	FaSink,
+	FaDumbbell,
+	FaSnowflake,
+	FaUmbrella,
+	FaTv,
+	FaCoffee,
+	FaList,
+} from "react-icons/fa";
 
 function PropertyEditForm({ property }) {
 	const [loading, setLoading] = useState(false);
@@ -34,31 +60,33 @@ function PropertyEditForm({ property }) {
 	}
 	return (
 		<form onSubmit={handleSubmit}>
-			<h2 className="text-3xl text-center font-semibold mb-6">
+			<h2 className="text-3xl text-center font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
 				Update Property
 			</h2>
 
-			<div className="mb-4">
-				<label htmlFor="type" className="block text-gray-700 font-bold mb-2">
+			<div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
+				<label htmlFor="type" className="block text-gray-700 font-bold mb-4">
 					Property Type
 				</label>
-				<select
-					id="type"
-					defaultValue={type}
-					name="type"
-					className="border rounded w-full py-2 px-3"
-					required>
-					<option value="Apartment">Apartment</option>
-					<option value="Condo">Condo</option>
-					<option value="House">House</option>
-					<option value="CabinOrCottage">Cabin or Cottage</option>
-					<option value="Room">Room</option>
-					<option value="Studio">Studio</option>
-					<option value="Other">Other</option>
-				</select>
+				<div className="relative">
+					<select
+						id="type"
+						defaultValue={type}
+						name="type"
+						className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md bg-white appearance-none cursor-pointer"
+						required>
+						<option value="Apartment">Apartment</option>
+						<option value="Condo">Condo</option>
+						<option value="House">House</option>
+						<option value="CabinOrCottage">Cabin or Cottage</option>
+						<option value="Room">Room</option>
+						<option value="Studio">Studio</option>
+						<option value="Other">Other</option>
+					</select>
+				</div>
 			</div>
-			<div className="mb-4">
-				<label className="block text-gray-700 font-bold mb-2">
+			<div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
+				<label className="block text-gray-700 font-bold mb-4">
 					Listing Name
 				</label>
 				<input
@@ -66,373 +94,564 @@ function PropertyEditForm({ property }) {
 					id="name"
 					defaultValue={name}
 					name="name"
-					className="border rounded w-full py-2 px-3 mb-2"
+					className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
 					placeholder="eg. Beautiful Apartment In Miami"
 					required
 				/>
 			</div>
-			<div className="mb-4">
+			<div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
 				<label
 					htmlFor="description"
-					className="block text-gray-700 font-bold mb-2">
+					className="block text-gray-700 font-bold mb-4">
 					Description
 				</label>
 				<textarea
 					id="description"
 					name="description"
-					className="border rounded w-full py-2 px-3"
+					className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
 					rows="4"
 					defaultValue={description}
 					placeholder="Add an optional description of your property"></textarea>
 			</div>
 
-			<div className="mb-4 bg-blue-50 p-4">
-				<label className="block text-gray-700 font-bold mb-2">Location</label>
-				<input
-					type="text"
-					id="street"
-					defaultValue={street}
-					name="location.street"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="Street"
-				/>
-				<input
-					type="text"
-					id="city"
-					defaultValue={city}
-					name="location.city"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="City"
-					required
-				/>
-				<input
-					type="text"
-					id="state"
-					defaultValue={state}
-					name="location.state"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="State"
-					required
-				/>
-				<input
-					type="text"
-					id="zipcode"
-					defaultValue={zipcode}
-					name="location.zipcode"
-					className="border rounded w-full py-2 px-3 mb-2"
-					placeholder="Zipcode"
-				/>
-			</div>
-
-			<div className="mb-4 flex flex-wrap">
-				<div className="w-full sm:w-1/3 pr-2">
-					<label htmlFor="beds" className="block text-gray-700 font-bold mb-2">
-						Beds
-					</label>
+			<div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
+				<label className="block text-gray-700 font-bold mb-4">
+					<FaMapMarkerAlt className="inline mr-2" />
+					Location
+				</label>
+				<div className="relative mb-3">
 					<input
-						type="number"
-						id="beds"
-						defaultValue={beds}
-						name="beds"
-						className="border rounded w-full py-2 px-3"
-						required
+						type="text"
+						id="street"
+						defaultValue={street}
+						name="location.street"
+						className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+						placeholder="Street"
 					/>
+					<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+						<FaMapMarkerAlt className="w-5 h-5" />
+					</div>
 				</div>
-				<div className="w-full sm:w-1/3 px-2">
-					<label htmlFor="baths" className="block text-gray-700 font-bold mb-2">
-						Baths
-					</label>
+				<div className="relative mb-3">
 					<input
-						type="number"
-						id="baths"
-						name="baths"
-						defaultValue={baths}
-						className="border rounded w-full py-2 px-3"
+						type="text"
+						id="city"
+						defaultValue={city}
+						name="location.city"
+						className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+						placeholder="City"
 						required
 					/>
+					<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+						<FaMapMarkerAlt className="w-5 h-5" />
+					</div>
 				</div>
-				<div className="w-full sm:w-1/3 pl-2">
-					<label
-						htmlFor="square_feet"
-						className="block text-gray-700 font-bold mb-2">
-						Square Feet
-					</label>
+				<div className="relative mb-3">
 					<input
-						type="number"
-						id="square_feet"
-						name="square_feet"
-						defaultValue={square_feet}
-						className="border 
-                                    rounded w-full py-2 px-3"
+						type="text"
+						id="state"
+						defaultValue={state}
+						name="location.state"
+						className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+						placeholder="State"
 						required
 					/>
+					<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+						<FaMapMarkerAlt className="w-5 h-5" />
+					</div>
+				</div>
+				<div className="relative">
+					<input
+						type="text"
+						id="zipcode"
+						defaultValue={zipcode}
+						name="location.zipcode"
+						className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+						placeholder="Zipcode"
+					/>
+					<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+						<FaMapMarkerAlt className="w-5 h-5" />
+					</div>
 				</div>
 			</div>
 
-			<div className="mb-4">
-				<label className="block text-gray-700 font-bold mb-2">Amenities</label>
-				<div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_wifi"
-							name="amenities"
-							value="Wifi"
-							defaultChecked={amenities.includes("Wifi")}
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_wifi">Wifi</label>
+			<div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+					<div className="relative">
+						<label
+							htmlFor="beds"
+							className="block text-gray-700 font-bold mb-2">
+							<FaBed className="inline mr-2" />
+							Beds
+						</label>
+						<div className="relative">
+							<input
+								type="number"
+								id="beds"
+								defaultValue={beds}
+								name="beds"
+								min="0"
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								required
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<FaBed className="w-5 h-5" />
+							</div>
+						</div>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_kitchen"
-							defaultChecked={amenities.includes("Full kitchen")}
-							name="amenities"
-							value="Full kitchen"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_kitchen">Full kitchen</label>
+					<div className="relative">
+						<label
+							htmlFor="baths"
+							className="block text-gray-700 font-bold mb-2">
+							<FaBath className="inline mr-2" />
+							Baths
+						</label>
+						<div className="relative">
+							<input
+								type="number"
+								id="baths"
+								name="baths"
+								min="0"
+								defaultValue={baths}
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								required
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<FaBath className="w-5 h-5" />
+							</div>
+						</div>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_washer_dryer"
-							defaultChecked={amenities.includes("Washer & Dryer")}
-							name="amenities"
-							value="Washer & Dryer"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_washer_dryer">Washer & Dryer</label>
+					<div className="relative">
+						<label
+							htmlFor="square_feet"
+							className="block text-gray-700 font-bold mb-2">
+							<FaRulerCombined className="inline mr-2" />
+							Square Feet
+						</label>
+						<div className="relative">
+							<input
+								type="number"
+								id="square_feet"
+								name="square_feet"
+								min="0"
+								defaultValue={square_feet}
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								required
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<FaRulerCombined className="w-5 h-5" />
+							</div>
+						</div>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_free_parking"
-							defaultChecked={amenities.includes("Free Parking")}
-							name="amenities"
-							value="Free Parking"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_free_parking">Free Parking</label>
+				</div>
+			</div>
+
+			<div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
+				<label className="block text-gray-700 font-bold mb-4">Amenities</label>
+				<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_wifi"
+								name="amenities"
+								value="Wifi"
+								defaultChecked={amenities.includes("Wifi")}
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_wifi"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Wifi
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_pool"
-							defaultChecked={amenities.includes("Swimming Pool")}
-							name="amenities"
-							value="Swimming Pool"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_pool">Swimming Pool</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_kitchen"
+								defaultChecked={amenities.includes("Full kitchen")}
+								name="amenities"
+								value="Full kitchen"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_kitchen"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Full kitchen
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_hot_tub"
-							defaultChecked={amenities.includes("Hot Tub")}
-							name="amenities"
-							value="Hot Tub"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_hot_tub">Hot Tub</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_washer_dryer"
+								defaultChecked={amenities.includes("Washer & Dryer")}
+								name="amenities"
+								value="Washer & Dryer"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_washer_dryer"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Washer & Dryer
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_24_7_security"
-							defaultChecked={amenities.includes("24/7 Security")}
-							name="amenities"
-							value="24/7 Security"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_24_7_security">24/7 Security</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_free_parking"
+								defaultChecked={amenities.includes("Free Parking")}
+								name="amenities"
+								value="Free Parking"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_free_parking"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Free Parking
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_wheelchair_accessible"
-							defaultChecked={amenities.includes("Wheelchair Accessible")}
-							name="amenities"
-							value="Wheelchair Accessible"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_wheelchair_accessible">
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_pool"
+								defaultChecked={amenities.includes("Swimming Pool")}
+								name="amenities"
+								value="Swimming Pool"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_pool"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Swimming Pool
+						</label>
+					</div>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_hot_tub"
+								defaultChecked={amenities.includes("Hot Tub")}
+								name="amenities"
+								value="Hot Tub"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_hot_tub"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Hot Tub
+						</label>
+					</div>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_24_7_security"
+								defaultChecked={amenities.includes("24/7 Security")}
+								name="amenities"
+								value="24/7 Security"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_24_7_security"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							24/7 Security
+						</label>
+					</div>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_wheelchair_accessible"
+								defaultChecked={amenities.includes("Wheelchair Accessible")}
+								name="amenities"
+								value="Wheelchair Accessible"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_wheelchair_accessible"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
 							Wheelchair Accessible
 						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_elevator_access"
-							defaultChecked={amenities.includes("Elevator Access")}
-							name="amenities"
-							value="Elevator Access"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_elevator_access">Elevator Access</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_elevator_access"
+								defaultChecked={amenities.includes("Elevator Access")}
+								name="amenities"
+								value="Elevator Access"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_elevator_access"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Elevator Access
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_dishwasher"
-							defaultChecked={amenities.includes("Dishwasher")}
-							name="amenities"
-							value="Dishwasher"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_dishwasher">Dishwasher</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_dishwasher"
+								defaultChecked={amenities.includes("Dishwasher")}
+								name="amenities"
+								value="Dishwasher"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_dishwasher"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Dishwasher
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_gym_fitness_center"
-							defaultChecked={amenities.includes("Gym/Fitness Center")}
-							name="amenities"
-							value="Gym/Fitness Center"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_gym_fitness_center">
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_gym_fitness_center"
+								defaultChecked={amenities.includes("Gym/Fitness Center")}
+								name="amenities"
+								value="Gym/Fitness Center"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_gym_fitness_center"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
 							Gym/Fitness Center
 						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_air_conditioning"
-							defaultChecked={amenities.includes("Air Conditioning")}
-							name="amenities"
-							value="Air Conditioning"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_air_conditioning">Air Conditioning</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_air_conditioning"
+								defaultChecked={amenities.includes("Air Conditioning")}
+								name="amenities"
+								value="Air Conditioning"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_air_conditioning"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Air Conditioning
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_balcony_patio"
-							defaultChecked={amenities.includes("Balcony/Patio")}
-							name="amenities"
-							value="Balcony/Patio"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_balcony_patio">Balcony/Patio</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_balcony_patio"
+								defaultChecked={amenities.includes("Balcony/Patio")}
+								name="amenities"
+								value="Balcony/Patio"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_balcony_patio"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Balcony/Patio
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_smart_tv"
-							defaultChecked={amenities.includes("Smart TV")}
-							name="amenities"
-							value="Smart TV"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_smart_tv">Smart TV</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_smart_tv"
+								defaultChecked={amenities.includes("Smart TV")}
+								name="amenities"
+								value="Smart TV"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_smart_tv"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Smart TV
+						</label>
 					</div>
-					<div>
-						<input
-							type="checkbox"
-							id="amenity_coffee_maker"
-							defaultChecked={amenities.includes("Coffee Maker")}
-							name="amenities"
-							value="Coffee Maker"
-							className="mr-2"
-						/>
-						<label htmlFor="amenity_coffee_maker">Coffee Maker</label>
+					<div className="relative flex items-start">
+						<div className="flex items-center h-5">
+							<input
+								type="checkbox"
+								id="amenity_coffee_maker"
+								defaultChecked={amenities.includes("Coffee Maker")}
+								name="amenities"
+								value="Coffee Maker"
+								className="h-5 w-5 rounded border-2 border-gray-300 text-blue-500 focus:ring-blue-500 focus:ring-offset-0 transition-colors duration-200 ease-in-out cursor-pointer"
+							/>
+						</div>
+						<label
+							htmlFor="amenity_coffee_maker"
+							className="ml-3 text-gray-700 cursor-pointer select-none hover:text-blue-500 transition-colors duration-200">
+							Coffee Maker
+						</label>
 					</div>
 				</div>
 			</div>
 
-			<div className="mb-4 bg-blue-50 p-4">
-				<label className="block text-gray-700 font-bold mb-2">
+			<div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
+				<label className="block text-gray-700 font-bold mb-4">
+					<FaDollarSign className="inline mr-2" />
 					Rates (Leave blank if not applicable)
 				</label>
-				<div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-					<div className="flex items-center">
-						<label htmlFor="weekly_rate" className="mr-2">
-							Weekly
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+					<div className="relative">
+						<label
+							htmlFor="weekly_rate"
+							className="block text-gray-700 font-bold mb-2">
+							<FaDollarSign className="inline mr-2" />
+							Weekly Rate
 						</label>
-						<input
-							defaultValue={weekly}
-							type="number"
-							id="weekly_rate"
-							name="rates.weekly"
-							className="border rounded w-full py-2 px-3"
-						/>
+						<div className="relative">
+							<input
+								defaultValue={weekly}
+								type="number"
+								id="weekly_rate"
+								name="rates.weekly"
+								min="0"
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								placeholder="Enter weekly rate"
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<span className="text-sm font-medium">$/week</span>
+							</div>
+						</div>
 					</div>
-					<div className="flex items-center">
-						<label htmlFor="monthly_rate" className="mr-2">
-							Monthly
+					<div className="relative">
+						<label
+							htmlFor="monthly_rate"
+							className="block text-gray-700 font-bold mb-2">
+							<FaDollarSign className="inline mr-2" />
+							Monthly Rate
 						</label>
-						<input
-							type="number"
-							id="monthly_rate"
-							defaultValue={monthly}
-							name="rates.monthly"
-							className="border rounded w-full py-2 px-3"
-						/>
+						<div className="relative">
+							<input
+								type="number"
+								id="monthly_rate"
+								defaultValue={monthly}
+								name="rates.monthly"
+								min="0"
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								placeholder="Enter monthly rate"
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<span className="text-sm font-medium">$/month</span>
+							</div>
+						</div>
 					</div>
-					<div className="flex items-center">
-						<label htmlFor="nightly_rate" className="mr-2">
-							Nightly
+					<div className="relative">
+						<label
+							htmlFor="nightly_rate"
+							className="block text-gray-700 font-bold mb-2">
+							<FaDollarSign className="inline mr-2" />
+							Nightly Rate
 						</label>
-						<input
-							type="number"
-							id="nightly_rate"
-							defaultValue={nightly}
-							name="rates.nightly"
-							className="border rounded w-full py-2 px-3"
-						/>
+						<div className="relative">
+							<input
+								type="number"
+								id="nightly_rate"
+								defaultValue={nightly}
+								name="rates.nightly"
+								min="0"
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								placeholder="Enter nightly rate"
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<span className="text-sm font-medium">$/night</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className="mb-4">
-				<label
-					htmlFor="seller_name"
-					className="block text-gray-700 font-bold mb-2">
-					Seller Name
+			<div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
+				<label className="block text-gray-700 font-bold mb-4">
+					Seller Information
 				</label>
-				<input
-					type="text"
-					defaultValue={sellerName}
-					id="seller_name"
-					name="seller_info.name"
-					className="border rounded w-full py-2 px-3"
-					placeholder="Name"
-				/>
-			</div>
-			<div className="mb-4">
-				<label
-					htmlFor="seller_email"
-					className="block text-gray-700 font-bold mb-2">
-					Seller Email
-				</label>
-				<input
-					type="email"
-					id="seller_email"
-					defaultValue={sellerEmail}
-					name="seller_info.email"
-					className="border rounded w-full py-2 px-3"
-					placeholder="Email address"
-					required
-				/>
-			</div>
-			<div className="mb-4">
-				<label
-					htmlFor="seller_phone"
-					className="block text-gray-700 font-bold mb-2">
-					Seller Phone
-				</label>
-				<input
-					type="tel"
-					id="seller_phone"
-					defaultValue={sellerPhone}
-					name="seller_info.phone"
-					className="border rounded w-full py-2 px-3"
-					placeholder="Phone"
-				/>
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+					<div className="relative">
+						<label
+							htmlFor="seller_name"
+							className="block text-gray-700 font-bold mb-2">
+							<FaUserCircle className="inline mr-2" />
+							Name
+						</label>
+						<div className="relative">
+							<input
+								type="text"
+								defaultValue={sellerName}
+								id="seller_name"
+								name="seller_info.name"
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								placeholder="Enter seller name"
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<FaUserCircle className="w-5 h-5" />
+							</div>
+						</div>
+					</div>
+					<div className="relative">
+						<label
+							htmlFor="seller_email"
+							className="block text-gray-700 font-bold mb-2">
+							<FaEnvelope className="inline mr-2" />
+							Email
+						</label>
+						<div className="relative">
+							<input
+								type="email"
+								id="seller_email"
+								defaultValue={sellerEmail}
+								name="seller_info.email"
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								placeholder="Enter seller email"
+								required
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<FaEnvelope className="w-5 h-5" />
+							</div>
+						</div>
+					</div>
+					<div className="relative">
+						<label
+							htmlFor="seller_phone"
+							className="block text-gray-700 font-bold mb-2">
+							<FaPhone className="inline mr-2" />
+							Phone
+						</label>
+						<div className="relative">
+							<input
+								type="tel"
+								id="seller_phone"
+								defaultValue={sellerPhone}
+								name="seller_info.phone"
+								className="w-full py-3 px-4 rounded-xl border-2 border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 hover:border-blue-500 hover:shadow-md"
+								placeholder="Enter phone number"
+							/>
+							<div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
+								<FaPhone className="w-5 h-5" />
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			{/* <div className="mb-4">
@@ -450,12 +669,10 @@ function PropertyEditForm({ property }) {
 				/>
 			</div> */}
 
-			<div>
+			<div className="mt-8">
 				<button
-					className={`bg-blue-500 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline ${
-						loading
-							? "opacity-50 cursor-not-allowed 25000"
-							: "hover:bg-blue-600"
+					className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl ${
+						loading ? "opacity-50 cursor-not-allowed" : ""
 					}`}
 					type="submit"
 					disabled={loading}>

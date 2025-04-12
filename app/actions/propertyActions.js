@@ -79,9 +79,10 @@ export async function addProperty(formData) {
 	// create new property - no need to call save() separately as create() already saves
 	const newProperty = await Property.create(propertyData);
 
-	// revalidate cache
+	// to clear the entire cache
+	revalidatePath("/profile");
 	revalidatePath("/properties");
-
+	revalidatePath("/");
 	return { success: true, propertyId: newProperty._id.toString() };
 }
 // delete property

@@ -13,8 +13,10 @@ function ShareButton({ property }) {
 	const shareUrl = `${process.env.NEXT_PUBLIC_DOMAIN}/properties/${property._id}`;
 	return (
 		<>
-			<h3 className="text-xl font-bold pt-2">Share This Property</h3>
-			<div className="flex gap-3 justify-center pb-5">
+			<h3 className="text-xl font-semibold text-blue-800 mb-4 pt-2">
+				Share This Property
+			</h3>
+			<div className="flex gap-4 justify-center pb-6 transition-all duration-300 hover:gap-5">
 				<FacebookShareButton
 					url={shareUrl}
 					quote={property.name}

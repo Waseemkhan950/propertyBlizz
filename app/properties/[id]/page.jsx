@@ -13,12 +13,12 @@ import { FaArrowLeft } from "react-icons/fa";
 const PropertyPage = async ({ params }) => {
 	await connectDB();
 	const sessionUser = await getSessionUser();
-	const { userId, user: userData } = sessionUser;
+	const { userId = "", user: userData } = sessionUser || {};
+
 	const property = await Property.findById({ _id: await params.id }).lean();
 	const serlizedProperty = JSON.parse(JSON.stringify(property));
 	let user;
 	let isBookmarked = false;
-
 	if (userId) {
 		user = await User.findOne({ _id: userId });
 		isBookmarked = user.bookmarks.includes(property._id);
@@ -54,7 +54,9 @@ const PropertyPage = async ({ params }) => {
 									user={userData}
 								/>
 							</aside>
-						) : null}
+						) : (
+							""
+						)}
 					</div>
 				</div>
 			</section>

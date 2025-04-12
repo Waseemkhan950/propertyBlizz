@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { setDefaults, fromAddress } from "react-geocode";
 import Map, { Marker } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
-import image from "../assets/images/pin.svg";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import Spinner from "./Spinner";
-import Image from "next/image";
 
 function PropertyMap({ property }) {
 	const [lat, setLat] = useState(null);
@@ -67,8 +66,9 @@ function PropertyMap({ property }) {
 				}}
 				style={{ width: "100%", height: "600px" }}
 				mapStyle="mapbox://styles/mapbox/streets-v12">
+				{" "}
 				<Marker latitude={lat} longitude={lng} anchor="bottom">
-					<Image src={image} alt="location" width={40} height={40} />
+					<FaMapMarkerAlt className="text-4xl text-red-500" />
 				</Marker>
 			</Map>
 		)
