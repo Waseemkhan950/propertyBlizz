@@ -71,7 +71,7 @@ const Footer = async () => {
 							<li>1234 Real Estate Ave</li>
 							<li>Property City, PC 12345</li>
 							<li>Phone: (555) 123-4567</li>
-							<li>Email: info@propertyblizz.com</li>
+							<li>Email: info@estatelink.com</li>
 						</ul>
 					</div>
 
