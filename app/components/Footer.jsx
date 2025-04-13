@@ -116,7 +116,7 @@ const Footer = async () => {
 				{/* Bottom Bar */}
 				<div className="border-t border-gray-700 mt-8 pt-8 text-center md:text-left">
 					<p className="text-sm text-gray-400">
-						&copy; {currentYear} PropertyBlizz. All rights reserved.
+						&copy; {currentYear} EstateLink. All rights reserved.
 					</p>
 				</div>
 			</div>
